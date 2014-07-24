@@ -24,6 +24,8 @@
 
 #import "CSNPlaceholderTextView.h"
 
+#define ON_IOS_7 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7)
+
 @interface CSNPlaceholderTextView ( )
 @property (nonatomic, strong) UILabel *placeholderLabel;
 @end
@@ -128,7 +130,12 @@
         [self.placeholderLabel sizeToFit];
         CGRect rect = CGRectZero;
         rect.size = self.placeholderLabel.frame.size;
-        const static CGFloat CARET_OFS = 0;
+        
+        CGFloat CARET_OFS = 0;
+        if (ON_IOS_7) {
+            CARET_OFS = 1;
+        }
+        
         rect.origin = CGPointMake(caretRect.origin.x, caretRect.origin.y + CARET_OFS);
         self.placeholderLabel.frame = rect;
     }
