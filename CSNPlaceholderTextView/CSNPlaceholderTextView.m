@@ -128,7 +128,8 @@
         [self.placeholderLabel sizeToFit];
         CGRect rect = CGRectZero;
         rect.size = self.placeholderLabel.frame.size;
-        rect.origin = caretRect.origin;
+        const static CGFloat CARET_OFS = 1;
+        rect.origin = CGPointMake(caretRect.origin.x, caretRect.origin.y + CARET_OFS);
         self.placeholderLabel.frame = rect;
     }
     return caretRect;
